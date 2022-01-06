@@ -12,7 +12,7 @@
 dedupBam=$1
 bwPath="/gpfs0/work/suhas/scripts/p-e_paper_2021/accessibility"
 threads=24
-chr="chr1|chr2|chr3|chr4|chr5|chr6|chr7|chr8|chr9|chr10|chr11|chr12|chr13|chr14|chr15|chr16|chr17|chr18|chr19|chr20|chr21|chr22|chrX"
+chr="chr1|chr10|chr11|chr12|chr13|chr14|chr15|chr16|chr17|chr18|chr19|chr2|chr20|chr21|chr22|chr3|chr4|chr5|chr6|chr7|chr8|chr9|chrX"
 outFile="output.bw"
 
 while getopts "g:t:c:ho:" opt; do
@@ -45,7 +45,7 @@ else
         }
 
         export -f doit
-        echo $chr | tr "|" "\n" | parallel -j $threads --will-cite --joblog temp.log -k doit > tmp.bedgraph
+        echo $chr | tr "|" "\n" | parallel -j $threads --will-cite --joblog temp.log -k doit | sort -k1,1 -k2,2n -S 6G > tmp.bedgraph
 fi
 date
 
