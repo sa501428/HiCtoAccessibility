@@ -4,7 +4,7 @@
 # samtools 1.13
 # UCSC bedGraphToBigWig utility
 
-#usage ./dnase_track_generation.sh [merged_dedup.bam] -c [chr] -t [threads] -g [chrom.sizes] -o [output file name]
+#usage ./dnase_track_generation.sh -c [chr] -t [threads] -g [chrom.sizes] -o [output file name] <merged_dedup.bam>
 # -c: list of chromsomes separated by "|"
 # -t: number of threads to use
 # -g: path to chrom.sizes file
