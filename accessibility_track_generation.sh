@@ -4,24 +4,26 @@
 # samtools 1.13
 # UCSC bedGraphToBigWig utility
 
-#usage ./dnase_track_generation.sh -c [chr] -t [threads] -g [chrom.sizes] -o [output file name] <merged_dedup.bam>
+#usage ./dnase_track_generation.sh -c [chr] -t [threads] -g [chrom.sizes] -o [output file name] -i [merged_dedup.bam]
 # -c: list of chromsomes separated by "|"
 # -t: number of threads to use
 # -g: path to chrom.sizes file
 # -o: output file name [bigWig format]
-dedupBam=$1
+$ -i: input file name [merged_dedup.bam]
+dedupBam="merged_dedup.bam"
 bwPath="/gpfs0/work/suhas/scripts/p-e_paper_2021/accessibility"
 threads=24
 chr="chr1|chr10|chr11|chr12|chr13|chr14|chr15|chr16|chr17|chr18|chr19|chr2|chr20|chr21|chr22|chr3|chr4|chr5|chr6|chr7|chr8|chr9|chrX"
 outFile="output.bw"
 
-while getopts "g:t:c:ho:" opt; do
+while getopts "g:t:c:ho:i:" opt; do
     case $opt in
         g) chromSizes=$OPTARG ;;
         h) printHelpAndExit 0;;
 	c) chr=$OPTARG ;;
 	t) threads=$OPTARG ;;
 	o) outFile=$OPTARG ;;
+	i) dedupBam=$OPTARG ;;
         [?]) printHelpAndExit 1;;
     esac
 done
