@@ -4,19 +4,11 @@ samtools view -@ ${threads} ${junction_rt_string} -h reads.sorted.bam $chr | awk
                         if(keep[$1]&&keep[$1]!=$2){
                                 delete keep[$1]
                         }else{
-                                if (keep[$1]){
-                                        x=rand();
-                                        if (x>=0.5){
-                                                keep[$1]=$2;
-                                                keepRT[$1]=$3;
-                                        }
-                                } else {
-                                        keep[$1]=$2;
-                                        if ($3%2==0){
-                                                keepRT[$1]=$3+1;
-                                        } else{
-                                                keepRT[$1]=$3-1;
-                                        }
+                                keep[$1]=$2;
+                                if ($3%2==0){
+                                        keepRT[$1 " " $3+1]++;
+                                } else{
+                                        keepRT[$1 " " $3-1]++;
                                 }
                         }
                 };
@@ -34,7 +26,7 @@ samtools view -@ ${threads} ${junction_rt_string} -h reads.sorted.bam $chr | awk
                                 split($i, rt, ":");
                         }
                 }
-                if (rt[3]==keepRT[$1]) {
+                if (keepRT[$1 " " rt[3]]!="") {
                         locus[$3" "ip[3]]++;
                 }
         }END{
