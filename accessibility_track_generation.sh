@@ -9,7 +9,7 @@
 # -t: number of threads to use
 # -g: path to chrom.sizes file
 # -o: output file name [bigWig format]
-$ -i: input file name [merged_dedup.bam]
+# -i: input file name [merged_dedup.bam]
 dedupBam="merged_dedup.bam"
 bwPath="/gpfs0/work/suhas/scripts/p-e_paper_2021/accessibility"
 threads=24
